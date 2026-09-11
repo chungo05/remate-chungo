@@ -1,50 +1,54 @@
 <title>Remate Grupo Chung</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112.5,500;112.5,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap">
 <style>
 :root{
-  --bg:#F5F6F3; --surface:#FFFFFF; --ink:#1B1F1D; --ink-2:#6E756F; --line:#DCDFD9;
-  --tag:#C4361D; --tag-ink:#FFFFFF; --wa:#1E8E5A; --wa-ink:#FFFFFF;
-  --sold:#B7BDB6; --hold:#B9821A; --free:#2F6F8F;
-  --display:"Archivo",system-ui,"Helvetica Neue",Arial,sans-serif;
-  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --bg:#F3F6F9; --surface:#FFFFFF; --ink:#072136; --ink-2:#4F6072; --line:#D8E1EA;
+  --navy:#072136; --navy-2:#0C3C60; --gold:#E4AD00; --gold-ink:#072136; --blue:#3179AF; --sky:#D8E8F2;
+  --tag:#B8860B; --wa:#1E8E5A; --wa-ink:#FFFFFF;
+  --sold:#8FA0B0; --hold:#3179AF; --free:#21755C;
+  --display:"Montserrat",system-ui,"Helvetica Neue",Arial,sans-serif;
+  --body:"Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
-  --bg:#141715; --surface:#1D211E; --ink:#EEF0EC; --ink-2:#A0A79F; --line:#2E332F;
-  --tag:#E2553A; --wa:#2BA56B; --sold:#4A514B; --hold:#D9A03A; --free:#5FA3C8;
+  --bg:#071A2B; --surface:#0E2A42; --ink:#EEF3F7; --ink-2:#9FB3C5; --line:#1F3A52;
+  --navy:#041424; --navy-2:#0C3C60; --gold:#F2C230; --sky:#1F3A52;
+  --tag:#F2C230; --wa:#2BA56B; --sold:#4A5C6C; --hold:#5FA3D6; --free:#3FA58A;
 }}
 :root[data-theme="dark"]{
-  --bg:#141715; --surface:#1D211E; --ink:#EEF0EC; --ink-2:#A0A79F; --line:#2E332F;
-  --tag:#E2553A; --wa:#2BA56B; --sold:#4A514B; --hold:#D9A03A; --free:#5FA3C8;
+  --bg:#071A2B; --surface:#0E2A42; --ink:#EEF3F7; --ink-2:#9FB3C5; --line:#1F3A52;
+  --navy:#041424; --navy-2:#0C3C60; --gold:#F2C230; --sky:#1F3A52;
+  --tag:#F2C230; --wa:#2BA56B; --sold:#4A5C6C; --hold:#5FA3D6; --free:#3FA58A;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;padding-block:0 48px}
 a{color:inherit}
-h1,h2,h3{font-family:var(--display);font-stretch:112.5%;font-weight:800;margin:0;text-wrap:balance;line-height:1.05}
+h1,h2,h3{font-family:var(--display);font-weight:800;margin:0;text-wrap:balance;line-height:1.05}
 .num{font-variant-numeric:tabular-nums}
 .wrap{max-width:1120px;margin:0 auto;padding-inline:16px}
 
 /* top bar */
-.bar{position:sticky;top:0;z-index:5;background:var(--ink);color:var(--bg);}
+.bar{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff;border-bottom:3px solid var(--gold)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:8px;flex-wrap:wrap}
-.bar .count{font-family:var(--display);font-stretch:112.5%;font-weight:800;font-size:15px;letter-spacing:.01em}
-.bar .count b{color:#FF7B5C}
+.bar .count{font-family:var(--display);font-weight:800;font-size:15px;letter-spacing:.01em}
+.bar .count b{color:var(--gold)}
 .btn-wa{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:var(--wa-ink);text-decoration:none;font-weight:600;padding:8px 14px;border-radius:999px;font-size:14px;white-space:nowrap}
 .btn-wa svg{width:18px;height:18px;fill:currentColor}
 .btn-wa:focus-visible,.chip:focus-visible{outline:3px solid var(--hold);outline-offset:2px}
 
 /* header */
-header.hero{padding-block:32px 20px;border-bottom:1px solid var(--line)}
-.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+header.hero{padding-block:28px 28px;background:var(--navy);color:#fff}
+.logo{display:block;width:180px;max-width:60%;height:auto;margin-bottom:18px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700}
 h1{font-size:clamp(34px,7vw,64px);margin-top:6px}
-h1 span{color:var(--tag)}
-.lead{max-width:62ch;color:var(--ink-2);margin:12px 0 0}
-.phase{display:inline-flex;gap:10px;align-items:baseline;margin-top:16px;padding:8px 12px;border:2px solid var(--tag);color:var(--tag);font-family:var(--display);font-stretch:112.5%;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.03em}
-.phase small{font-family:var(--body);font-weight:500;text-transform:none;letter-spacing:0;color:var(--ink-2)}
+h1 span{color:var(--gold)}
+.lead{max-width:62ch;color:#C9D6E2;margin:12px 0 0}
+.phase{display:inline-flex;gap:10px;align-items:baseline;margin-top:16px;padding:8px 12px;background:var(--gold);color:var(--gold-ink);font-family:var(--display);font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.03em}
+.phase small{font-family:var(--body);font-weight:600;text-transform:none;letter-spacing:0;color:var(--gold-ink);opacity:.8}
 
 /* filters */
 .filters{display:flex;gap:8px;flex-wrap:wrap;padding-block:16px}
 .chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px;font:inherit;font-size:13px;font-weight:500;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--navy-2);color:#fff;border-color:var(--navy-2)}
 .chip .n{color:var(--ink-2);margin-left:4px}
 .chip[aria-pressed="true"] .n{color:inherit;opacity:.7}
 
@@ -56,20 +60,20 @@ h1 span{color:var(--tag)}
 .card .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .card .ph .nophoto{position:absolute;inset:0;display:grid;place-items:center;color:var(--ink-2);font-size:13px;text-align:center;padding:16px}
 .card .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
-.id{font-family:var(--display);font-stretch:112.5%;font-weight:500;font-size:12px;letter-spacing:.06em;color:var(--ink-2)}
+.id{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.06em;color:var(--ink-2)}
 .card h3{font-size:16px;line-height:1.25;font-weight:800}
 .estado{font-size:13px;color:var(--ink-2)}
 .nota{font-size:12px;color:var(--ink-2)}
 .price{margin-top:auto;padding-top:8px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.price .now{font-family:var(--display);font-stretch:112.5%;font-weight:800;font-size:24px;color:var(--tag);line-height:1}
+.price .now{font-family:var(--display);font-weight:800;font-size:24px;color:var(--tag);line-height:1}
 .price .was{color:var(--ink-2);text-decoration:line-through;font-size:14px}
 .price .each{font-size:12px;color:var(--ink-2)}
 .tags{display:flex;gap:6px;flex-wrap:wrap}
 .tag{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
-.tag.inst{border-color:var(--hold);color:var(--hold)}
+.tag.inst{border-color:var(--tag);color:var(--tag)}
 .tag.free{background:var(--free);color:#fff;border-color:var(--free)}
-.tag.units{border-color:var(--ink);color:var(--ink)}
-.ribbon{position:absolute;top:10px;left:0;padding:4px 10px;font-family:var(--display);font-stretch:112.5%;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#fff}
+.tag.units{border-color:var(--blue);color:var(--blue)}
+.ribbon{position:absolute;top:10px;left:0;padding:4px 10px;font-family:var(--display);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#fff}
 .ribbon.apartado{background:var(--hold)}
 .ribbon.vendido{background:var(--sold)}
 .card .btn-wa{margin-top:10px;justify-content:center}
@@ -78,9 +82,9 @@ h1 span{color:var(--tag)}
 
 /* sections */
 section{padding-block:36px 0}
-h2{font-size:24px;margin-bottom:14px}
+h2{font-size:24px;margin-bottom:14px;padding-left:12px;border-left:5px solid var(--gold)}
 .lots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.lot{border:2px solid var(--ink);padding:16px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
+.lot{border:2px solid var(--navy-2);border-top:6px solid var(--gold);padding:16px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
 .lot h3{font-size:18px}
 .lot .detalle{color:var(--ink-2);font-size:14px}
 .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px 28px;max-width:960px}
@@ -97,6 +101,7 @@ footer{margin-top:40px;color:var(--ink-2);font-size:13px;border-top:1px solid va
 </div></div>
 
 <header class="hero"><div class="wrap">
+  <img class="logo" src="__LOGO__" alt="Chung Seguros &amp; Fianzas">
   <div class="eyebrow">Grupo Póliza Chung · Tampico</div>
   <h1>Remate por cierre de oficina. <span>Todo debe salir.</span></h1>
   <p class="lead">Mobiliario, equipo de cómputo, clima y electrodomésticos de la oficina de Av. Valles 230, Local 14. Se vende tal cual, se aparta por WhatsApp y se recoge en el local.</p>
