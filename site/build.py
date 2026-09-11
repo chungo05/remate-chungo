@@ -10,7 +10,7 @@ html = html.replace("__LOGO__", "data:image/png;base64," + base64.b64encode(open
 html = html.replace("__DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))
 os.makedirs(f"{out}/fotos", exist_ok=True)
 # fotos como archivos aparte: el HTML pesa poco y cada foto carga sola (loading="lazy")
-used = {i["foto"] for i in data["items"] if i.get("foto")}
+used = {foto for i in data["items"] for foto in [i.get("foto"), *i.get("fotosExtras", [])] if foto}
 for f in os.listdir(f"{out}/fotos"):
     if f[:-4] not in used: os.remove(f"{out}/fotos/{f}")
 missing = []

@@ -87,7 +87,7 @@ a.chip{text-decoration:none}
 @media (min-width:700px){.grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}}
 .card{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
 .ph{aspect-ratio:1;background:var(--line);position:relative;padding:0;border:0;display:block;width:100%;cursor:zoom-in}
-.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .ph.none{cursor:default;display:grid;place-items:center;color:var(--ink-2);font-size:14px;text-align:center;padding:12px}
 .ph.none a{color:var(--ink);font-weight:600;text-underline-offset:3px}
 .card.skel{min-height:300px;border-color:transparent}
@@ -107,7 +107,14 @@ a.chip{text-decoration:none}
 .tag.free{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
 .status{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:4px;position:absolute;top:8px;left:8px}
 .status.apartado{background:var(--hold);color:var(--on-hold)}
-.status.vendido{background:var(--sold);color:var(--on-sold)}
+.status.vendido{background:#B91C1C;color:#fff;top:auto;bottom:12px;left:8px;right:8px;z-index:2;font-size:clamp(18px,3vw,26px);text-align:center;padding:8px;box-shadow:0 2px 8px #0006}
+.card.is-vendido{border:2px solid #DC2626}
+.card.is-vendido .ph::after{content:"";position:absolute;inset:12%;background:linear-gradient(45deg,transparent 47%,#DC2626 47%,#DC2626 53%,transparent 53%),linear-gradient(-45deg,transparent 47%,#DC2626 47%,#DC2626 53%,transparent 53%);pointer-events:none}
+.card.is-vendido .ph img{opacity:.65}
+.card .photo-extras{display:flex;gap:8px;flex-wrap:wrap}
+.photo-extra{width:52px;height:52px;border:1px solid var(--ink-2);border-radius:4px;padding:0;background:var(--surface);cursor:zoom-in;overflow:hidden}
+.photo-extra img{width:100%;height:100%;object-fit:contain;display:block}
+.ph.fit img{object-fit:contain}
 
 .price{margin-top:auto;padding-top:8px}
 .price .now{font-size:30px;line-height:1;color:var(--ink);display:block}
@@ -235,7 +242,7 @@ function card(i){
   if (gratis) tags.push(`<span class="tag free">Gratis con cualquier compra</span>`);
   const status = i.status !== "disponible" ? `<span class="status ${i.status}">${i.status}</span>` : "";
   const ph = i.foto
-    ? `<button class="ph" type="button" data-foto="${i.foto}" data-cap="${esc(i.id + " · " + i.nombre)}" aria-label="Ver foto grande: ${esc(i.nombre)}"><img src="fotos/${i.foto}.jpg" alt="" loading="lazy">${status}</button>`
+    ? `<button class="ph${i.fotosExtras ? " fit" : ""}" type="button" data-foto="${i.foto}" data-cap="${esc(i.id + " · " + i.nombre)}" aria-label="Ver foto grande: ${esc(i.nombre)}"><img src="fotos/${i.foto}.jpg" alt="" loading="lazy">${status}</button>`
     : `<div class="ph none"><span>Sin foto aún. <a href="${wa(`Hola, ¿me mandas foto de ${i.id} – ${i.nombre}?`)}" target="_blank" rel="noopener">Pídela por WhatsApp</a></span>${status}</div>`;
   const msg = `Hola, me interesa ${i.id} – ${i.nombre} (${gratis ? "gratis" : mxn(price)}). ¿Sigue disponible?`;
   const action = i.status === "vendido" ? "" :
@@ -243,6 +250,7 @@ function card(i){
   return `<article class="card is-${i.status}">
     ${ph}
     <div class="body">
+      ${i.fotosExtras?.length ? `<div class="photo-extras" role="group" aria-label="Más fotos de ${esc(i.nombre)}">${i.fotosExtras.map((foto, ix) => `<button class="photo-extra" type="button" data-foto="${esc(foto)}" data-cap="${esc(i.id + " · " + i.nombre)}" aria-label="Ver foto adicional ${ix + 1} de ${esc(i.nombre)}"><img src="fotos/${esc(foto)}.jpg" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
       <div class="key">${i.id}</div>
       <h3>${esc(i.nombre)}</h3>
       <div class="estado">${esc(i.estado)}</div>
@@ -285,7 +293,7 @@ render();
 // visor de fotos
 const viewer = document.getElementById('viewer'), vimg = document.getElementById('viewer-img'), vcap = document.getElementById('viewer-cap');
 grid.addEventListener('click', e => {
-  const b = e.target.closest('button.ph'); if (!b) return;
+  const b = e.target.closest('button[data-foto]'); if (!b) return;
   vimg.src = b.querySelector('img').src; vimg.alt = b.dataset.cap; vcap.textContent = b.dataset.cap;
   viewer.showModal();
 });

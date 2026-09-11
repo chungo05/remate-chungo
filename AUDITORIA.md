@@ -12,3 +12,11 @@ Resultado: verificaciones locales satisfactorias antes de publicar.
 - Publicación: HTML regenerado con `python3 site/build.py`; sitio estático de aproximadamente 716 KB incluyendo fotos, con carga diferida de imágenes y HTTPS configurado en GitHub Pages.
 
 Las pruebas responsive son emulación de tamaños en Chromium, no pruebas en teléfonos físicos. La auditoría automática es esencial, no una certificación integral de accesibilidad ni una medición de rendimiento en redes móviles reales.
+
+## Actualización: fotos y vendido destacado
+
+- Conmutador conservado con cruz roja, etiqueta roja «VENDIDO», borde rojo y precio tachado; sin botón de compra.
+- Agregadas cuatro fotos para PC-01 y PC-02, incluidas vistas adicionales en miniaturas. Los 30 artículos tienen foto principal; 32 archivos de imagen en total.
+- Corregido el contenedor de fotos verticales para mantener su proporción cuadrada en las tarjetas.
+- Repetidas las 16 combinaciones de ancho/tema y cuatro auditorías axe-core: sin fallos. Comprobados enlaces de compra de disponibles, filtros, imágenes y apertura/cierre con Escape de las fotos adicionales; sin errores JavaScript.
+- Las fotografías originales se conservan sin retoques. Se aclara que computadora y monitor se venden por separado.

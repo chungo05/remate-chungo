@@ -53,8 +53,10 @@ Al cambiar estilos en `site/index.html`, vuelve a ejecutar `python3 site/build.p
 | `nuevo` | Opcional. Precio aproximado nuevo; se muestra tachado como referencia ("Nuevo cuesta ~$12,000"). |
 | `unidades` | Si es > 1 se muestra "N disponibles" y el precio lleva "c/u". |
 | `instalado` | `true` muestra la etiqueta "Instalado · tú lo desmontas". |
-| `status` | `disponible` / `apartado` / `vendido`. Apartado cambia el botón a "Preguntar si se libera"; vendido tacha el precio y quita el botón. |
+| `status` | `disponible` / `apartado` / `vendido`. Apartado cambia el botón a "Preguntar si se libera"; vendido muestra una cruz y etiqueta rojas, tacha el precio y quita el botón. |
 | `foto` | Clave del archivo en `site/fotos/` sin extensión. Sin foto, la tarjeta ofrece pedirla por WhatsApp. |
+
+| `fotosExtras` | Opcional. Lista de claves de fotos adicionales; aparecen como miniaturas y se abren en el visor. |
 
 ### `lotes[]`
 
