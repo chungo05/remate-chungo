@@ -19,6 +19,18 @@ git add -A docs site && git commit -m "MOB-17 vendido" && git push
 
 Pages se actualiza en ~1 minuto. `build.py` también avisa si algún artículo referencia una foto que no existe.
 
+## Diseño responsive
+
+La plantilla es móvil primero y se adapta al ancho disponible sin depender de tamaños de dispositivo concretos:
+
+- Los márgenes laterales, el espacio entre secciones y los encabezados usan valores fluidos.
+- El catálogo pasa de una a dos columnas cuando cada tarjeta conserva un ancho útil; en pantallas mayores aumenta a tarjetas de 240 px como mínimo.
+- Las tarjetas usan *container queries* para compactar tipografía y escalones de precio solo cuando su propio ancho lo requiere.
+- Los filtros se desplazan horizontalmente, los botones conservan un área táctil mínima de 44 px y los textos largos se parten sin provocar desplazamiento horizontal.
+- La barra superior reduce logo y separación en pantallas de hasta 359 px para mantener visible el contador y el acceso a WhatsApp.
+
+Al cambiar estilos en `site/index.html`, vuelve a ejecutar `python3 site/build.py`: `docs/index.html` es el archivo servido y debe viajar en el mismo commit.
+
 ## `items.json`
 
 ### `config`
