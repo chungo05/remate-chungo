@@ -1,116 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Remate Grupo Chung</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap">
+<meta name="description" content="Remate por cierre de oficina en Tampico: mobiliario, cómputo, clima y electrodomésticos. Se aparta por WhatsApp y se recoge en el local.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap">
 <style>
+/* ---- tokens: navy and gold come from the Chung logo; green is WhatsApp's, used only on the action ---- */
 :root{
-  --bg:#F3F6F9; --surface:#FFFFFF; --ink:#072136; --ink-2:#4F6072; --line:#D8E1EA;
-  --navy:#072136; --navy-2:#0C3C60; --gold:#E4AD00; --gold-ink:#072136; --blue:#3179AF; --sky:#D8E8F2;
-  --tag:#B8860B; --wa:#1E8E5A; --wa-ink:#FFFFFF;
-  --sold:#8FA0B0; --hold:#3179AF; --free:#21755C;
-  --display:"Montserrat",system-ui,"Helvetica Neue",Arial,sans-serif;
-  --body:"Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --bg:#F4F5F7; --surface:#FFFFFF; --ink:#0B1F33; --ink-2:#52627A; --line:#DDE3EA;
+  --navy:#0B1F33; --gold:#E4AD00; --on-gold:#0B1F33; --gold-text:#7A5C00;
+  --wa:#0B6B3A; --on-wa:#FFFFFF;
+  --hold:#1B5E8F; --on-hold:#FFFFFF; --sold:#4E5D6C; --on-sold:#FFFFFF;
+  --display:"Barlow Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --r:6px;
+  color-scheme:light dark;
 }
 @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
-  --bg:#071A2B; --surface:#0E2A42; --ink:#EEF3F7; --ink-2:#9FB3C5; --line:#1F3A52;
-  --navy:#041424; --navy-2:#0C3C60; --gold:#F2C230; --sky:#1F3A52;
-  --tag:#F2C230; --wa:#2BA56B; --sold:#4A5C6C; --hold:#5FA3D6; --free:#3FA58A;
+  --bg:#0A1522; --surface:#12233A; --ink:#EDF1F5; --ink-2:#A3B3C4; --line:#26384F;
+  --navy:#07101B; --gold:#F2C230; --on-gold:#0A1522; --gold-text:#F2C230;
+  --wa:#3DDC84; --on-wa:#0A1522;
+  --hold:#7EC0F0; --on-hold:#0A1522; --sold:#9AA8B6; --on-sold:#0A1522;
 }}
 :root[data-theme="dark"]{
-  --bg:#071A2B; --surface:#0E2A42; --ink:#EEF3F7; --ink-2:#9FB3C5; --line:#1F3A52;
-  --navy:#041424; --navy-2:#0C3C60; --gold:#F2C230; --sky:#1F3A52;
-  --tag:#F2C230; --wa:#2BA56B; --sold:#4A5C6C; --hold:#5FA3D6; --free:#3FA58A;
+  --bg:#0A1522; --surface:#12233A; --ink:#EDF1F5; --ink-2:#A3B3C4; --line:#26384F;
+  --navy:#07101B; --gold:#F2C230; --on-gold:#0A1522; --gold-text:#F2C230;
+  --wa:#3DDC84; --on-wa:#0A1522;
+  --hold:#7EC0F0; --on-hold:#0A1522; --sold:#9AA8B6; --on-sold:#0A1522;
 }
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;padding-block:0 48px}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;padding-block:0 56px}
 a{color:inherit}
-h1,h2,h3{font-family:var(--display);font-weight:800;margin:0;text-wrap:balance;line-height:1.05}
+button{font:inherit;color:inherit}
+h1,h2,h3{margin:0;text-wrap:balance}
+h1,h2,.price .now,.ladder .amt,.rung .amt,.bar .count{font-family:var(--display);font-weight:800;letter-spacing:.005em}
 .num{font-variant-numeric:tabular-nums}
 .wrap{max-width:1120px;margin:0 auto;padding-inline:16px}
+:where(a,button,summary):focus-visible{outline:3px solid var(--hold);outline-offset:2px}
 
-/* top bar */
+/* ---- top bar: logo, countdown, one action ---- */
 .bar{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff;border-bottom:3px solid var(--gold)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:8px;flex-wrap:wrap}
-.bar .count{font-family:var(--display);font-weight:800;font-size:15px;letter-spacing:.01em}
+.bar .wrap{display:flex;align-items:center;gap:12px;min-height:56px;padding-block:6px}
+.bar .logo{height:30px;width:auto;display:block;flex:none}
+.bar .count{font-size:19px;line-height:1.1;text-transform:uppercase;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bar .count b{color:var(--gold)}
-.btn-wa{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:var(--wa-ink);text-decoration:none;font-weight:600;padding:8px 14px;border-radius:999px;font-size:14px;white-space:nowrap}
-.btn-wa svg{width:18px;height:18px;fill:currentColor}
-.btn-wa:focus-visible,.chip:focus-visible{outline:3px solid var(--hold);outline-offset:2px}
+.bar .count small{display:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--body);font-weight:400;font-size:12px;text-transform:none;letter-spacing:0;color:#C9D6E2}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:999px;border:0;
+  text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap;cursor:pointer;background:var(--wa);color:var(--on-wa)}
+.btn svg{width:20px;height:20px;fill:currentColor;flex:none}
+.btn:hover{filter:brightness(1.08)}
+.btn:active{filter:brightness(.9);transform:scale(.98)}
+.chip:hover{border-color:var(--ink-2)}
+.bar .btn .t{display:none}
+@media (max-width:599px){.bar .btn{width:44px;padding:0}}
+@media (min-width:600px){.bar .btn .t{display:inline}.bar .btn{padding-inline:18px}.bar .count small{display:block}}
 
-/* header */
-header.hero{padding-block:28px 28px;background:var(--navy);color:#fff}
-.logo{display:block;width:180px;max-width:60%;height:auto;margin-bottom:18px}
-.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700}
-h1{font-size:clamp(34px,7vw,64px);margin-top:6px}
-h1 span{color:var(--gold)}
-.lead{max-width:62ch;color:#C9D6E2;margin:12px 0 0}
-.phase{display:inline-flex;gap:10px;align-items:baseline;margin-top:16px;padding:8px 12px;background:var(--gold);color:var(--gold-ink);font-family:var(--display);font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.03em}
-.phase small{font-family:var(--body);font-weight:600;text-transform:none;letter-spacing:0;color:var(--gold-ink);opacity:.8}
+/* ---- hero: the headline and the price ladder ---- */
+.hero{padding-block:28px 8px}
+h1{font-size:clamp(44px,9vw,84px);line-height:.92;text-transform:uppercase}
+h1 .accent{color:var(--gold-text)}
+.lead{max-width:60ch;color:var(--ink-2);margin:14px 0 0;font-size:17px}
+.lead a{color:var(--ink);text-underline-offset:3px}
+.historia{max-width:60ch;margin:12px 0 0;padding-left:12px;border-left:3px solid var(--gold);color:var(--ink-2);font-size:15px}
 
-/* filters */
-.filters{display:flex;gap:8px;flex-wrap:wrap;padding-block:16px}
-.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px;font:inherit;font-size:13px;font-weight:500;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--navy-2);color:#fff;border-color:var(--navy-2)}
-.chip .n{color:var(--ink-2);margin-left:4px}
-.chip[aria-pressed="true"] .n{color:inherit;opacity:.7}
+.ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:22px;list-style:none;padding:0}
+.ladder li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:2px;position:relative}
+.ladder .when{font-size:13px;color:var(--ink-2);font-weight:600}
+.ladder .amt{font-size:clamp(26px,6vw,40px);line-height:1;color:var(--ink)}
+.ladder .name{font-size:13px;color:var(--ink-2)}
+.ladder li.past{color:var(--ink-2)}
+.ladder li.past .amt{text-decoration:line-through;text-decoration-thickness:3px;color:var(--ink-2)}
+.ladder li.now{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.ladder li.now .when,.ladder li.now .amt,.ladder li.now .name{color:var(--on-gold)}
+.ladder li.now .when::before{content:"Hoy";display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.ladder li.future{border-style:dashed}
+.ladder .keep{display:block;grid-column:1/-1;font-size:14px;color:var(--ink-2);margin:2px 0 0}
+.ladder .keep b{color:var(--ink)}
+.ladder .keep a{color:var(--ink);text-underline-offset:3px}
+@media (max-width:420px){.ladder{gap:4px}.ladder li{padding:10px 10px}.ladder .name{display:none}}
 
-/* grid */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-.card{background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;position:relative}
-.card.is-vendido{opacity:.55}
-.card .ph{aspect-ratio:1;background:var(--line);overflow:hidden;position:relative}
-.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
-.card .ph .nophoto{position:absolute;inset:0;display:grid;place-items:center;color:var(--ink-2);font-size:13px;text-align:center;padding:16px}
-.card .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
-.id{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.06em;color:var(--ink-2)}
-.card h3{font-size:16px;line-height:1.25;font-weight:800}
-.estado{font-size:13px;color:var(--ink-2)}
-.nota{font-size:12px;color:var(--ink-2)}
-.price{margin-top:auto;padding-top:8px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.price .now{font-family:var(--display);font-weight:800;font-size:24px;color:var(--tag);line-height:1}
-.price .was{color:var(--ink-2);text-decoration:line-through;font-size:14px}
-.price .each{font-size:12px;color:var(--ink-2)}
-.tags{display:flex;gap:6px;flex-wrap:wrap}
-.tag{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
-.tag.inst{border-color:var(--tag);color:var(--tag)}
-.tag.free{background:var(--free);color:#fff;border-color:var(--free)}
-.tag.units{border-color:var(--blue);color:var(--blue)}
-.ribbon{position:absolute;top:10px;left:0;padding:4px 10px;font-family:var(--display);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#fff}
-.ribbon.apartado{background:var(--hold)}
-.ribbon.vendido{background:var(--sold)}
-.card .btn-wa{margin-top:10px;justify-content:center}
-.card.is-vendido .btn-wa{display:none}
+/* ---- filters ---- */
+.filters{scroll-margin-top:64px;display:flex;gap:8px;padding-block:20px 14px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin-inline:-16px;padding-inline:16px}
+.filters::-webkit-scrollbar{display:none}
+a.chip{text-decoration:none}
+.chip{flex:none;min-height:44px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;border-radius:999px;font-size:15px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip .n{color:var(--ink-2);font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip[aria-pressed="true"] .n{color:inherit;opacity:.75}
+
+/* ---- catalog grid ---- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+@media (min-width:700px){.grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
+.ph{aspect-ratio:1;background:var(--line);position:relative;padding:0;border:0;display:block;width:100%;cursor:zoom-in}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph.none{cursor:default;display:grid;place-items:center;color:var(--ink-2);font-size:14px;text-align:center;padding:12px}
+.ph.none a{color:var(--ink);font-weight:600;text-underline-offset:3px}
+.card.skel{min-height:300px;border-color:transparent}
+.card.skel .body>*{background:var(--line);border-radius:4px;height:14px}
+.card.skel .body>.w1{width:40%}.card.skel .body>.w2{width:85%}.card.skel .body>.w3{width:60%;margin-top:auto;height:28px}
+@media (prefers-reduced-motion:no-preference){.card.skel{animation:skel 1.2s ease-in-out infinite}}
+@keyframes skel{50%{opacity:.55}}
+.ph:focus-visible{outline-offset:-3px}
+.card .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:5px;flex:1}
+.key{font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.02em}
+.card h3{font-size:16px;line-height:1.25;font-weight:700}
+.estado{font-size:14px;color:var(--ink-2)}
+.nota{font-size:13px;color:var(--ink-2)}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:12px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
+.tag.inst{color:var(--gold-text);border-color:currentColor}
+.tag.free{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
+.status{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:4px;position:absolute;top:8px;left:8px}
+.status.apartado{background:var(--hold);color:var(--on-hold)}
+.status.vendido{background:var(--sold);color:var(--on-sold)}
+
+.price{margin-top:auto;padding-top:8px}
+.price .now{font-size:30px;line-height:1;color:var(--ink);display:block}
+.price .now .each{font-family:var(--body);font-weight:400;font-size:13px;color:var(--ink-2);margin-left:4px}
+.price .nuevo{display:block;font-size:13px;color:var(--ink-2);margin-top:2px}
+.price .nuevo s{text-decoration-thickness:1.5px}
+.rungs{display:flex;gap:4px;margin-top:6px}
+.rung{flex:1;min-width:0;border-radius:4px;padding:3px 5px;border:1px solid var(--line);line-height:1.15}
+.rung .amt{display:block;font-size:14px;color:var(--ink)}
+.rung .when{display:block;font-size:11px;font-weight:600;color:var(--ink-2)}
+.rung.past .amt{text-decoration:line-through;text-decoration-thickness:2px;color:var(--ink-2)}
+.rung.now{background:var(--gold);border-color:var(--gold)}
+.rung.now .amt,.rung.now .when{color:var(--on-gold)}
+.rung.future{border-style:dashed}
+.card.is-vendido .price .now{text-decoration:line-through;color:var(--ink-2)}
+.card.is-vendido .rungs,.card.is-vendido .btn{display:none}
+.card .btn{margin-top:10px;width:100%}
+.card.is-apartado .btn{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
 .empty{padding:40px 0;color:var(--ink-2);text-align:center}
 
-/* sections */
-section{padding-block:36px 0}
-h2{font-size:24px;margin-bottom:14px;padding-left:12px;border-left:5px solid var(--gold)}
-.lots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.lot{border:2px solid var(--navy-2);border-top:6px solid var(--gold);padding:16px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
-.lot h3{font-size:18px}
-.lot .detalle{color:var(--ink-2);font-size:14px}
-.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px 28px;max-width:960px}
-.how dt{font-weight:600;margin-bottom:2px}
-.how dd{margin:0;color:var(--ink-2);font-size:14px}
-footer{margin-top:40px;color:var(--ink-2);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
-@media (prefers-reduced-motion:no-preference){.card{transition:transform .15s}.card:hover{transform:translateY(-2px)}}
-@media (max-width:420px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}.card .body{padding:10px}.card h3{font-size:14px}.price .now{font-size:20px}.card .btn-wa{font-size:13px;padding:7px 10px}}
+/* ---- packages and how it works ---- */
+section{padding-block:40px 0;scroll-margin-top:64px}
+h2{font-size:34px;line-height:1;text-transform:uppercase;margin-bottom:14px;padding-left:12px;border-left:6px solid var(--gold)}
+.lots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.lot{border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
+.lot h3{font-size:18px;font-weight:700}
+.lot .detalle{color:var(--ink-2);font-size:15px}
+.lot .was{color:var(--ink-2);font-size:14px}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 28px;max-width:960px;margin:0}
+.how dt{font-weight:700;margin-bottom:2px}
+.how dd{margin:0;color:var(--ink-2);font-size:15px}
+.how dd a{color:var(--ink);text-underline-offset:3px}
+footer{margin-top:40px;color:var(--ink-2);font-size:14px;border-top:1px solid var(--line);padding-top:16px}
+
+/* ---- photo viewer ---- */
+dialog.viewer{border:0;padding:0;background:transparent;max-width:min(96vw,1000px);max-height:96vh;width:auto}
+dialog.viewer::backdrop{background:rgba(4,10,18,.88)}
+.viewer figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
+.viewer img{max-width:96vw;max-height:80vh;width:auto;height:auto;border-radius:var(--r);background:#000}
+.viewer figcaption{color:#fff;font-size:15px;text-align:center;padding-inline:8px}
+.viewer .close{position:fixed;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+.viewer .close:hover{background:rgba(255,255,255,.28)}
+
+@media (prefers-reduced-motion:no-preference){
+  .card{transition:border-color .12s}
+  .card:hover{border-color:var(--ink-2)}
+}
+@media (prefers-contrast:more){.card,.lot,.rung,.ladder li{border-color:var(--ink)}}
 </style>
+</head>
+<body>
 
 <div class="bar"><div class="wrap">
-  <div class="count" id="countdown">Cierre 18 de septiembre</div>
-  <a class="btn-wa" id="wa-top" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.1.6 2.8.5a2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.5-.3z"/></svg>Preguntar por WhatsApp</a>
+  <img class="logo" src="__LOGO__" alt="Chung Seguros y Fianzas">
+  <div class="count" id="countdown" aria-live="polite"></div>
+  <a class="btn" id="wa-top" href="#" target="_blank" rel="noopener" aria-label="Preguntar por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.1.6 2.8.5a2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.5-.3z"/></svg><span class="t">Preguntar por WhatsApp</span></a>
 </div></div>
 
 <header class="hero"><div class="wrap">
-  <img class="logo" src="__LOGO__" alt="Chung Seguros &amp; Fianzas">
-  <div class="eyebrow">Grupo Póliza Chung · Tampico</div>
-  <h1>Remate por cierre de oficina. <span>Todo debe salir.</span></h1>
-  <p class="lead">Mobiliario, equipo de cómputo, clima y electrodomésticos de la oficina de Av. Valles 230, Local 14. Se vende tal cual, se aparta por WhatsApp y se recoge en el local.</p>
-  <div class="phase" id="phase"></div>
+  <h1>Remate por cierre de oficina. <span class="accent">Todo debe salir.</span></h1>
+  <p class="lead">Mobiliario, cómputo, clima y electrodomésticos de la oficina de <a id="dir-link" href="#como">Av. Valles 230, Local 14, Tampico</a>. Se vende tal cual, se aparta por WhatsApp y se recoge en el local.</p>
+  <p class="historia" id="historia" hidden></p>
+  <ol class="ladder num" id="ladder" aria-label="Calendario de precios"></ol>
 </div></header>
 
 <main class="wrap">
   <div class="filters" id="filters" role="group" aria-label="Filtrar por categoría"></div>
-  <div class="grid" id="grid"></div>
+  <div class="grid" id="grid"><article class="card skel" aria-hidden="true"><div class="ph none"></div><div class="body"><span class="w1"></span><span class="w2"></span><span class="w3"></span></div></article><article class="card skel" aria-hidden="true"><div class="ph none"></div><div class="body"><span class="w1"></span><span class="w2"></span><span class="w3"></span></div></article><article class="card skel" aria-hidden="true"><div class="ph none"></div><div class="body"><span class="w1"></span><span class="w2"></span><span class="w3"></span></div></article><article class="card skel" aria-hidden="true"><div class="ph none"></div><div class="body"><span class="w1"></span><span class="w2"></span><span class="w3"></span></div></article><article class="card skel" aria-hidden="true"><div class="ph none"></div><div class="body"><span class="w1"></span><span class="w2"></span><span class="w3"></span></div></article><article class="card skel" aria-hidden="true"><div class="ph none"></div><div class="body"><span class="w1"></span><span class="w2"></span><span class="w3"></span></div></article></div>
   <div class="empty" id="empty" hidden>No hay artículos en esta categoría.</div>
 
   <section id="lotes">
@@ -122,16 +199,21 @@ footer{margin-top:40px;color:var(--ink-2);font-size:13px;border-top:1px solid va
     <h2>Cómo funciona</h2>
     <dl class="how">
       <div><dt>Apartar</dt><dd>Toca "Me interesa" en el artículo. Se abre WhatsApp con la clave ya escrita. Lo apartamos a tu nombre por 24 horas.</dd></div>
-      <div><dt>Ver y recoger</dt><dd id="dir">Av. Valles 230, Local 14, Col. Flamboyanes, Tampico. Confirma tu horario por WhatsApp antes de venir.</dd></div>
+      <div><dt>Ver y recoger</dt><dd id="dir"></dd></div>
       <div><dt>Pago</dt><dd>Efectivo o transferencia al recoger. Precios con IVA incluido.</dd></div>
       <div><dt>Instalados</dt><dd>Minisplits, conmutador, cámaras y gabinetes de luz están montados. El comprador los desmonta y se los lleva; no incluimos técnico.</dd></div>
       <div><dt>Sin garantía</dt><dd>Todo es usado y se vende en el estado que se describe. Revísalo antes de pagar.</dd></div>
-      <div><dt>Precios bajan</dt><dd>Precio de lista hasta el 13 de septiembre. Del 14 al 15: 25% menos. Del 16 al 18: 40% menos. Lo que se aparta conserva el precio del día.</dd></div>
+      <div><dt>Precios bajan</dt><dd id="fases"></dd></div>
     </dl>
   </section>
 
-  <footer>Última actualización: <span id="updated"></span>. Los artículos marcados como apartados pueden liberarse si no se recogen en 24 h — pregunta por WhatsApp.</footer>
+  <footer>Última actualización: <span id="updated"></span>. Los artículos apartados pueden liberarse si no se recogen en 24 h — pregunta por WhatsApp.</footer>
 </main>
+
+<dialog class="viewer" id="viewer" aria-label="Foto del artículo">
+  <form method="dialog"><button class="close" aria-label="Cerrar">×</button></form>
+  <figure><img id="viewer-img" src="" alt=""><figcaption id="viewer-cap"></figcaption></figure>
+</dialog>
 
 <script id="data" type="application/json">__DATA__</script>
 <script>
@@ -141,47 +223,90 @@ const CATS = [["all","Todo"],["mobiliario","Mobiliario"],["sillas","Sillas"],["c
 const mxn = n => "$" + Math.round(n).toLocaleString("es-MX");
 const today = new Date(); today.setHours(0,0,0,0);
 const parse = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y,m-1,d); };
+const dayOf = d => d.toLocaleDateString("es-MX",{day:"numeric",month:"short"}).replace(".","");
+const addDays = (d,n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-// fase de precios
-let phase = C.fases[0];
-for (const f of C.fases) if (parse(f.desde) <= today) phase = f;
-if (C.faseForzada != null) phase = C.fases[C.faseForzada];
-document.getElementById('phase').innerHTML = phase.nombre + (phase.desc ? "" : ` <small>Baja 25% el 14 de septiembre y 40% el 16</small>`);
+// fase de precios: la última cuyo inicio ya pasó, salvo que se fuerce una
+let phaseIx = 0;
+C.fases.forEach((f,ix) => { if (parse(f.desde) <= today) phaseIx = ix; });
+if (C.faseForzada != null) phaseIx = C.faseForzada;
+const phase = C.fases[phaseIx];
+const close = parse(C.cierre);
+const range = ix => {
+  const a = parse(C.fases[ix].desde);
+  const b = ix + 1 < C.fases.length ? addDays(parse(C.fases[ix+1].desde), -1) : close;
+  if (a.getTime() === b.getTime()) return dayOf(a);
+  return a.getMonth() === b.getMonth() ? `${a.getDate()}–${dayOf(b)}` : `${dayOf(a)} – ${dayOf(b)}`;
+};
+const state = ix => ix < phaseIx ? "past" : ix === phaseIx ? "now" : "future";
+
+// escalera de precios (hero): precio de referencia = el artículo más caro
+const maxPrice = Math.max(...D.items.map(i => i.precio));
+document.getElementById('ladder').innerHTML = C.fases.map((f,ix) => `
+  <li class="${state(ix)}">
+    <span class="when">${range(ix)}</span>
+    <span class="amt">${f.desc ? `−${Math.round(f.desc*100)}%` : "Lista"}</span>
+    <span class="name">${f.desc ? `Ej. ${mxn(maxPrice)} → ${mxn(maxPrice*(1-f.desc))}` : "Precio de lista"}</span>
+  </li>`).join("") + `<li class="keep">Lo que se aparta conserva el precio del día. Quien espera paga menos, si el artículo sigue aquí.</li>`;
+
+// texto de fases en "Cómo funciona", derivado de config
+document.getElementById('fases').textContent = C.fases.map((f,ix) =>
+  `${range(ix)}: ${f.desc ? `${Math.round(f.desc*100)}% menos` : "precio de lista"}`).join(". ") + ". Lo que se aparta conserva el precio del día.";
+document.getElementById('dir').innerHTML = (C.mapa ? `<a href="${esc(C.mapa)}" target="_blank" rel="noopener">${esc(C.direccion)}</a>` : esc(C.direccion))
+  + " Confirma tu horario por WhatsApp antes de venir." + (C.telefono ? ` Si no usas WhatsApp, llama al <a href="tel:${C.telefono.replace(/\s/g,"")}">${esc(C.telefono)}</a>.` : "");
+if (C.mapa) { const l = document.getElementById('dir-link'); l.href = C.mapa; l.target = "_blank"; l.rel = "noopener"; }
+if (C.historia) { const h = document.getElementById('historia'); h.textContent = C.historia; h.hidden = false; }
+const nGratis = D.items.filter(i => i.precio === 0 && i.status === "disponible").length;
+if (nGratis) document.getElementById('ladder').insertAdjacentHTML('beforeend',
+  `<li class="keep"><b>${nGratis} artículo${nGratis > 1 ? "s" : ""} gratis</b> con cualquier compra — <a href="#filters" class="cat-link" data-cat="gratis">ver cuáles</a>.</li>`);
 
 // cuenta regresiva
-const close = parse(C.cierre);
 const days = Math.round((close - today) / 864e5);
 const avail = D.items.filter(i => i.status === "disponible").length;
+const gone = D.items.length - avail;
+const updated = D.updated ? parse(D.updated) : today;
+const freshness = updated.getTime() === today.getTime() ? "actualizado hoy" : `actualizado el ${dayOf(updated)}`;
 document.getElementById('countdown').innerHTML =
   (days > 1 ? `Cierra en <b>${days} días</b>` : days === 1 ? `Cierra <b>mañana</b>` : days === 0 ? `<b>Último día</b>` : `<b>Cerrado</b>`) +
-  ` · ${avail} artículos disponibles`;
+  `<small>${avail} disponibles${gone ? ` · ${gone} ya se fueron` : ""} · ${freshness}</small>`;
 
 const wa = txt => `https://wa.me/${C.whatsapp}?text=${encodeURIComponent(txt)}`;
 document.getElementById('wa-top').href = wa("Hola, vi el remate de Grupo Chung y tengo una pregunta.");
-document.getElementById('updated').textContent = new Date(D.updated || Date.now()).toLocaleDateString("es-MX",{day:"numeric",month:"long"});
+document.getElementById('updated').textContent = updated.toLocaleDateString("es-MX",{day:"numeric",month:"long"});
 
 const grid = document.getElementById('grid'), empty = document.getElementById('empty');
+function rungs(precio){
+  return `<div class="rungs" aria-label="Precio por fecha">` + C.fases.map((f,ix) =>
+    `<span class="rung ${state(ix)}"><span class="amt">${mxn(precio*(1-f.desc))}</span><span class="when">${state(ix)==="now" ? "Hoy" : dayOf(parse(f.desde))}</span></span>`
+  ).join("") + `</div>`;
+}
 function card(i){
   const price = i.precio * (1 - phase.desc);
   const gratis = i.precio === 0;
   const tags = [];
-  if (i.unidades > 1) tags.push(`<span class="tag units">${i.unidades} disponibles</span>`);
+  if (i.unidades > 1) tags.push(`<span class="tag">${i.unidades} disponibles</span>`);
   if (i.instalado) tags.push(`<span class="tag inst">Instalado · tú lo desmontas</span>`);
   if (gratis) tags.push(`<span class="tag free">Gratis con cualquier compra</span>`);
-  const ribbon = i.status !== "disponible" ? `<span class="ribbon ${i.status}">${i.status}</span>` : "";
-  const ph = i.foto ? `<img src="fotos/${i.foto}.jpg" alt="${i.nombre}" loading="lazy">` : `<div class="nophoto">Foto pendiente</div>`;
+  const status = i.status !== "disponible" ? `<span class="status ${i.status}">${i.status}</span>` : "";
+  const ph = i.foto
+    ? `<button class="ph" type="button" data-foto="${i.foto}" data-cap="${esc(i.id + " · " + i.nombre)}" aria-label="Ver foto grande: ${esc(i.nombre)}"><img src="fotos/${i.foto}.jpg" alt="" loading="lazy">${status}</button>`
+    : `<div class="ph none"><span>Sin foto aún. <a href="${wa(`Hola, ¿me mandas foto de ${i.id} – ${i.nombre}?`)}" target="_blank" rel="noopener">Pídela por WhatsApp</a></span>${status}</div>`;
   const msg = `Hola, me interesa ${i.id} – ${i.nombre} (${gratis ? "gratis" : mxn(price)}). ¿Sigue disponible?`;
+  const action = i.status === "vendido" ? "" :
+    `<a class="btn" href="${wa(msg)}" target="_blank" rel="noopener">${i.status === "apartado" ? "Preguntar si se libera" : "Me interesa"}</a>`;
   return `<article class="card is-${i.status}">
-    <div class="ph">${ph}${ribbon}</div>
+    ${ph}
     <div class="body">
-      <div class="id">${i.id}</div>
-      <h3>${i.nombre}</h3>
-      <div class="estado">${i.estado}</div>
-      ${i.nota ? `<div class="nota">${i.nota}</div>` : ""}
+      <div class="key">${i.id}</div>
+      <h3>${esc(i.nombre)}</h3>
+      <div class="estado">${esc(i.estado)}</div>
+      ${i.nota ? `<div class="nota">${esc(i.nota)}</div>` : ""}
       ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
-      <div class="price num">${gratis ? `<span class="now">Gratis</span>` :
-        `<span class="now">${mxn(price)}</span>${phase.desc ? `<span class="was">${mxn(i.precio)}</span>` : ""}${i.unidades > 1 ? `<span class="each">c/u</span>` : ""}`}</div>
-      <a class="btn-wa" href="${wa(msg)}" target="_blank" rel="noopener">Me interesa</a>
+      <div class="price num">${gratis
+        ? `<span class="now">Gratis</span>`
+        : `<span class="now">${mxn(price)}${i.unidades > 1 ? `<span class="each">c/u</span>` : ""}</span>${i.nuevo ? `<span class="nuevo">Nuevo cuesta <s>~${mxn(i.nuevo)}</s></span>` : ""}${rungs(i.precio)}`}</div>
+      ${action}
     </div></article>`;
 }
 let current = "all";
@@ -193,20 +318,40 @@ function render(){
 const fl = document.getElementById('filters');
 fl.innerHTML = CATS.map(([k,l]) => {
   const n = k === "all" ? D.items.length : D.items.filter(i => i.cat === k).length;
-  return `<button class="chip" id="chip-${k}" data-cat="${k}" aria-pressed="${k===current}">${l}<span class="n">${n}</span></button>`;
-}).join("");
-fl.addEventListener('click', e => {
-  const b = e.target.closest('.chip'); if (!b) return;
-  current = b.dataset.cat;
-  fl.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === b));
+  return `<button class="chip" type="button" data-cat="${k}" aria-pressed="${k===current}">${l}<span class="n">${n}</span></button>`;
+}).join("") + (D.lotes.length ? `<a class="chip" href="#lotes">Paquetes<span class="n">${D.lotes.length}</span></a>` : "");
+function setCat(cat){
+  current = cat;
+  fl.querySelectorAll('button.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.cat === cat));
   render();
+}
+fl.addEventListener('click', e => {
+  const b = e.target.closest('button.chip'); if (!b) return;
+  setCat(b.dataset.cat);
+});
+document.addEventListener('click', e => {
+  const a = e.target.closest('a.cat-link'); if (!a) return;
+  e.preventDefault(); setCat(a.dataset.cat);
+  fl.scrollIntoView({behavior:"smooth", block:"start"});
 });
 render();
 
+// visor de fotos
+const viewer = document.getElementById('viewer'), vimg = document.getElementById('viewer-img'), vcap = document.getElementById('viewer-cap');
+grid.addEventListener('click', e => {
+  const b = e.target.closest('button.ph'); if (!b) return;
+  vimg.src = b.querySelector('img').src; vimg.alt = b.dataset.cap; vcap.textContent = b.dataset.cap;
+  viewer.showModal();
+});
+viewer.addEventListener('click', e => { if (e.target === viewer) viewer.close(); });
+viewer.addEventListener('close', () => { vimg.src = ""; });
+
 document.getElementById('lots').innerHTML = D.lotes.map(l => {
   const p = l.precio * (1 - phase.desc);
-  return `<div class="lot"><h3>${l.nombre}</h3><div class="detalle">${l.detalle}</div>
-    <div class="price num"><span class="now">${mxn(p)}</span><span class="was">${mxn(l.lista)} por separado</span></div>
-    <a class="btn-wa" href="${wa(`Hola, me interesa el paquete "${l.nombre}" (${mxn(p)}). ¿Sigue disponible?`)}" target="_blank" rel="noopener">Me interesa el paquete</a></div>`;
+  return `<div class="lot"><h3>${esc(l.nombre)}</h3><div class="detalle">${esc(l.detalle)}</div>
+    <div class="price num"><span class="now">${mxn(p)}</span><span class="was">${mxn(l.lista)} comprando por separado</span></div>
+    <a class="btn" href="${wa(`Hola, me interesa el paquete "${l.nombre}" (${mxn(p)}). ¿Sigue disponible?`)}" target="_blank" rel="noopener">Me interesa el paquete</a></div>`;
 }).join("");
 </script>
+</body>
+</html>

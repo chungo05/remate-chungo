@@ -2,18 +2,58 @@
 
 Catálogo de liquidación por cierre de oficina. Página estática, sin backend.
 
-- `site/items.json` — inventario, precios, estatus (`disponible` / `apartado` / `vendido`), fases de descuento y paquetes. **Aquí se edita todo.**
-- `site/index.html` — plantilla de la página.
-- `site/fotos/` — fotos por clave (MOB-xx.jpg).
-- `site/build.py` — genera `docs/index.html` con fotos y datos incrustados.
-- `docs/` — lo que sirve GitHub Pages en chungo.tech.
+- `site/items.json` — **aquí se edita todo**: inventario, precios, estatus, fases de descuento, paquetes y textos de configuración.
+- `site/index.html` — plantilla de la página (HTML, CSS y JS en un solo archivo).
+- `site/fotos/` — fotos por clave (`MOB-xx.jpg`).
+- `site/logo.png` — logo de la barra superior (se incrusta en el HTML).
+- `site/build.py` — genera `docs/`.
+- `docs/` — lo que sirve GitHub Pages en chungo.tech. **No se edita a mano.**
 
 ## Actualizar (ej. marcar algo vendido)
 
 ```sh
 # 1. editar site/items.json  →  "status": "vendido"
 python3 site/build.py
-git commit -am "MOB-17 vendido" && git push
+git add -A docs site && git commit -m "MOB-17 vendido" && git push
 ```
 
-Pages se actualiza en ~1 minuto.
+Pages se actualiza en ~1 minuto. `build.py` también avisa si algún artículo referencia una foto que no existe.
+
+## `items.json`
+
+### `config`
+
+| Campo | Uso |
+|---|---|
+| `whatsapp` | Número con lada de país, sin `+` (`528331881215`). Todos los botones abren `wa.me` con un mensaje ya escrito. |
+| `telefono` | Se muestra como link `tel:` en "Cómo funciona", para quien no usa WhatsApp. |
+| `direccion` | Texto de la dirección. |
+| `mapa` | URL de Google Maps; la dirección se vuelve link en el hero y en "Ver y recoger". |
+| `historia` | Línea humana bajo el título del hero (por qué se vende, qué pasa con el despacho). Si se deja vacía, no se muestra. |
+| `cierre` | Último día (`YYYY-MM-DD`). Alimenta la cuenta regresiva de la barra. |
+| `fases` | Escalera de precios: `{ "desde", "nombre", "desc" }`. La fase activa es la última cuyo `desde` ya pasó. `desc` es fracción (`0.25` = 25% menos). |
+| `faseForzada` | Índice de fase para forzar una en vez de calcularla por fecha (`null` = automático). Útil para previsualizar. |
+
+### `items[]`
+
+| Campo | Uso |
+|---|---|
+| `id` | Clave que ve el comprador y que llega en el mensaje de WhatsApp (`MOB-21`). |
+| `nombre`, `cat`, `estado`, `nota` | Textos de la tarjeta. `cat` debe ser una de: `mobiliario`, `sillas`, `computo`, `clima`, `electro`, `gratis`. |
+| `precio` | Precio de lista con IVA. `0` = gratis con cualquier compra. |
+| `nuevo` | Opcional. Precio aproximado nuevo; se muestra tachado como referencia ("Nuevo cuesta ~$12,000"). |
+| `unidades` | Si es > 1 se muestra "N disponibles" y el precio lleva "c/u". |
+| `instalado` | `true` muestra la etiqueta "Instalado · tú lo desmontas". |
+| `status` | `disponible` / `apartado` / `vendido`. Apartado cambia el botón a "Preguntar si se libera"; vendido tacha el precio y quita el botón. Los no disponibles cuentan como "ya se fueron" en la barra. |
+| `foto` | Clave del archivo en `site/fotos/` sin extensión. Sin foto, la tarjeta ofrece pedirla por WhatsApp. |
+
+### `lotes[]`
+
+`{ "nombre", "detalle", "lista", "precio" }` — `lista` es la suma comprando por separado; `precio` el del paquete. Aparecen en la sección "Paquetes" y como chip en los filtros.
+
+## Qué hace `build.py`
+
+1. Incrusta `items.json` y `logo.png` en `docs/index.html` y fija `updated` a la fecha de hoy.
+2. Copia a `docs/fotos/` solo las fotos que usa el catálogo y borra las que ya no.
+
+El HTML pesa ~65 KB; cada foto carga aparte con `loading="lazy"`.

@@ -2,7 +2,10 @@
   "config": {
     "whatsapp": "528331881215",
     "cierre": "2026-09-18",
+    "telefono": "+52 833 188 1215",
     "direccion": "Av. Valles 230, Local 14, Col. Flamboyanes, Tampico, Tamps.",
+    "mapa": "https://maps.google.com/?q=Av.+Valles+230+Local+14,+Col.+Flamboyanes,+Tampico,+Tamps.",
+    "historia": "Cerramos la oficina de Av. Valles, no el despacho: seguimos atendiendo a nuestros asegurados. Preferimos que estas cosas sigan sirviendo a alguien de Tampico que mandarlas a la basura.",
     "fases": [
       { "desde": "2026-09-10", "nombre": "Precio de lista", "desc": 0 },
       { "desde": "2026-09-14", "nombre": "Segunda semana: 25% menos", "desc": 0.25 },
