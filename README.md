@@ -3,7 +3,7 @@
 Catálogo de liquidación por cierre de oficina. Página estática, sin backend.
 
 - `site/items.json` — **aquí se edita todo**: inventario, precios, estatus, fases de descuento, paquetes y textos de configuración.
-- `site/index.html` — plantilla de la página (HTML, CSS y JS en un solo archivo).
+- `site/index.html` — plantilla de la página (HTML, CSS y JS en un solo archivo). Diseño: navy y dorado del logo, Barlow Condensed para títulos y precios, fuente del sistema para lo demás; claro/oscuro automático, contraste ≥ 4.5:1, controles de 44 px, visor de fotos con `<dialog>`. La **escalera de precios** (hero y cada tarjeta) se genera de `config.fases`: no hay fechas escritas a mano.
 - `site/fotos/` — fotos por clave (`MOB-xx.jpg`).
 - `site/logo.png` — logo de la barra superior (se incrusta en el HTML).
 - `site/build.py` — genera `docs/`.
@@ -31,7 +31,7 @@ Pages se actualiza en ~1 minuto. `build.py` también avisa si algún artículo r
 | `mapa` | URL de Google Maps; la dirección se vuelve link en el hero y en "Ver y recoger". |
 | `historia` | Línea humana bajo el título del hero (por qué se vende, qué pasa con el despacho). Si se deja vacía, no se muestra. |
 | `cierre` | Último día (`YYYY-MM-DD`). Alimenta la cuenta regresiva de la barra. |
-| `fases` | Escalera de precios: `{ "desde", "nombre", "desc" }`. La fase activa es la última cuyo `desde` ya pasó. `desc` es fracción (`0.25` = 25% menos). |
+| `fases` | Escalera de precios: `{ "desde", "nombre", "desc" }`. La fase activa es la última cuyo `desde` ya pasó. `desc` es fracción (`0.25` = 25% menos). Cada tarjeta muestra los tres escalones: pasado tachado, hoy en dorado, futuro punteado. |
 | `faseForzada` | Índice de fase para forzar una en vez de calcularla por fecha (`null` = automático). Útil para previsualizar. |
 
 ### `items[]`
@@ -44,12 +44,12 @@ Pages se actualiza en ~1 minuto. `build.py` también avisa si algún artículo r
 | `nuevo` | Opcional. Precio aproximado nuevo; se muestra tachado como referencia ("Nuevo cuesta ~$12,000"). |
 | `unidades` | Si es > 1 se muestra "N disponibles" y el precio lleva "c/u". |
 | `instalado` | `true` muestra la etiqueta "Instalado · tú lo desmontas". |
-| `status` | `disponible` / `apartado` / `vendido`. Apartado cambia el botón a "Preguntar si se libera"; vendido tacha el precio y quita el botón. Los no disponibles cuentan como "ya se fueron" en la barra. |
+| `status` | `disponible` / `apartado` / `vendido`. Apartado cambia el botón a "Preguntar si se libera"; vendido tacha el precio y quita el botón y la escalera. |
 | `foto` | Clave del archivo en `site/fotos/` sin extensión. Sin foto, la tarjeta ofrece pedirla por WhatsApp. |
 
 ### `lotes[]`
 
-`{ "nombre", "detalle", "lista", "precio" }` — `lista` es la suma comprando por separado; `precio` el del paquete. Aparecen en la sección "Paquetes" y como chip en los filtros.
+`{ "nombre", "detalle", "lista", "precio" }` — `lista` es la suma comprando por separado; `precio` el del paquete. Aparecen en la sección "Paquetes"; su precio también baja con la fase activa.
 
 ## Qué hace `build.py`
 
