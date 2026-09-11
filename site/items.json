@@ -4,14 +4,14 @@
     "telefono": "+52 833 188 1215",
     "direccion": "Av. Valles 230, Local 14, Col. Flamboyanes, Tampico, Tamps.",
     "mapa": "https://maps.google.com/?q=Av.+Valles+230+Local+14,+Col.+Flamboyanes,+Tampico,+Tamps.",
-    "historia": "Cerramos la oficina de Av. Valles, no el despacho: seguimos atendiendo a nuestros asegurados. Preferimos que estas cosas sigan sirviendo a alguien de Tampico que mandarlas a la basura."
+    "historia": "Nos cambiamos de oficina y seguimos atendiendo a nuestros asegurados. Preferimos que estas cosas sigan sirviendo a alguien de Tampico que mandarlas a la basura."
   },
   "items": [
     {"id": "MOB-22", "nombre": "Minisplit Mirage Inverter X32", "cat": "clima", "estado": "Buen estado", "precio": 8000, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-22"},
     {"id": "MOB-21", "nombre": "Conjunto ejecutivo en \"L\" con librero y credenza de madera", "cat": "mobiliario", "estado": "Usado", "precio": 4500, "unidades": 1, "status": "disponible", "foto": "MOB-21"},
     {"id": "MOB-23", "nombre": "Minisplit Mirage (oficina central)", "cat": "clima", "estado": "Usado, con detalles de funcionamiento", "precio": 3200, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-23"},
     {"id": "MOB-01", "nombre": "Impresora multifuncional Samsung Xpress M2875FW", "cat": "computo", "estado": "Usada, operativa (imprime, copia y escanea)", "precio": 3000, "unidades": 1, "status": "disponible", "foto": "MOB-01"},
-    {"id": "MOB-28", "nombre": "Conmutador híbrido Panasonic", "cat": "computo", "estado": "Instalado y funcional", "precio": 2800, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-28"},
+    {"id": "MOB-28", "nombre": "Conmutador híbrido Panasonic", "cat": "computo", "estado": "Instalado y funcional", "precio": 2800, "unidades": 1, "instalado": true, "status": "vendido", "foto": "MOB-28"},
     {"id": "PC-01", "nombre": "Computadora de escritorio AMD Ryzen 5 5600GT · 16 GB RAM · 480 GB SSD", "cat": "computo", "estado": "Comprada en octubre 2025 · garantía de fábrica vigente hasta octubre 2027 · se entrega formateada", "precio": 4300, "unidades": 1, "status": "disponible", "foto": null, "nota": "Sin mouse ni teclado. Precio sugerido, por confirmar."},
     {"id": "MOB-17", "nombre": "Frigobar Whirlpool gris/acero", "cat": "electro", "estado": "Funcional, usado", "precio": 2300, "unidades": 1, "status": "disponible", "foto": "MOB-17"},
     {"id": "MOB-14", "nombre": "Librero / gabinete alto de 4 puertas", "cat": "mobiliario", "estado": "Usado", "precio": 1900, "unidades": 1, "status": "disponible", "foto": "MOB-14"},

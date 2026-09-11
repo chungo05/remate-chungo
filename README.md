@@ -1,6 +1,6 @@
 # Remate Grupo Chung — chungo.tech
 
-Catálogo de liquidación por cierre de oficina. Página estática, sin backend.
+Catálogo de liquidación por cambio de oficina. Página estática, sin backend.
 
 - `site/items.json` — **aquí se edita todo**: inventario, precios, estatus, paquetes y textos de configuración.
 - `site/index.html` — plantilla de la página (HTML, CSS y JS en un solo archivo). Diseño: navy y dorado del logo, Barlow Condensed para títulos y precios, fuente del sistema para lo demás; claro/oscuro automático, contraste ≥ 4.5:1, controles de 44 px, visor de fotos con `<dialog>`. Los precios son fijos y no dependen de fechas.
