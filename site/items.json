@@ -1,0 +1,53 @@
+{
+  "config": {
+    "whatsapp": "528331881215",
+    "cierre": "2026-09-18",
+    "direccion": "Av. Valles 230, Local 14, Col. Flamboyanes, Tampico, Tamps.",
+    "fases": [
+      { "desde": "2026-09-10", "nombre": "Precio de lista", "desc": 0 },
+      { "desde": "2026-09-14", "nombre": "Segunda semana: 25% menos", "desc": 0.25 },
+      { "desde": "2026-09-16", "nombre": "Últimos días: 40% menos", "desc": 0.40 }
+    ],
+    "faseForzada": null
+  },
+  "items": [
+    { "id": "MOB-22", "nombre": "Minisplit Mirage Inverter X32", "cat": "clima", "estado": "Buen estado", "precio": 9280, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-22" },
+    { "id": "MOB-21", "nombre": "Conjunto ejecutivo en \"L\" con librero y credenza de madera", "cat": "mobiliario", "estado": "Usado", "precio": 5220, "unidades": 1, "status": "disponible", "foto": "MOB-21" },
+    { "id": "MOB-23", "nombre": "Minisplit Mirage (oficina central)", "cat": "clima", "estado": "Usado, con detalles de funcionamiento", "precio": 3712, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-23" },
+    { "id": "MOB-01", "nombre": "Impresora multifuncional Samsung Xpress M2875FW", "cat": "computo", "estado": "Usada, operativa (imprime, copia y escanea)", "precio": 3480, "unidades": 1, "status": "disponible", "foto": "MOB-01" },
+    { "id": "MOB-28", "nombre": "Conmutador híbrido Panasonic", "cat": "computo", "estado": "Instalado y funcional", "precio": 3248, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-28" },
+    { "id": "PC-01", "nombre": "Computadora de escritorio AMD Ryzen 5 5600GT · 16 GB RAM · 480 GB SSD", "cat": "computo", "estado": "Comprada en octubre 2025 · garantía de fábrica vigente hasta octubre 2027 · se entrega formateada", "precio": 4900, "unidades": 1, "status": "disponible", "foto": null, "nota": "Sin mouse ni teclado. Precio sugerido, por confirmar." },
+    { "id": "MOB-17", "nombre": "Frigobar Whirlpool gris/acero", "cat": "electro", "estado": "Funcional, usado", "precio": 2668, "unidades": 1, "status": "disponible", "foto": "MOB-17" },
+    { "id": "MOB-14", "nombre": "Librero / gabinete alto de 4 puertas", "cat": "mobiliario", "estado": "Usado", "precio": 2204, "unidades": 1, "status": "disponible", "foto": "MOB-14" },
+    { "id": "MOB-13", "nombre": "Archivero vertical gris de 4 cajones con llave", "cat": "mobiliario", "estado": "Usado", "precio": 2001, "unidades": 1, "status": "disponible", "foto": "MOB-13" },
+    { "id": "MOB-15", "nombre": "Set de cámaras de seguridad con monitor (CCTV)", "cat": "computo", "estado": "Usado, instalación funcional", "precio": 1868, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-15" },
+    { "id": "MOB-19", "nombre": "Escritorio operativo en \"L\"", "cat": "mobiliario", "estado": "Detalles estéticos", "precio": 1601, "unidades": 1, "status": "disponible", "foto": "MOB-19" },
+    { "id": "PC-02", "nombre": "Monitor 23.8\" Full HD (HDMI / DisplayPort)", "cat": "computo", "estado": "Comprado en octubre 2025, como nuevo", "precio": 1500, "unidades": 1, "status": "disponible", "foto": null, "nota": "Precio sugerido, por confirmar." },
+    { "id": "MOB-09", "nombre": "Módulo de trabajo / escritorio con copete superior", "cat": "mobiliario", "estado": "Detalles estéticos", "precio": 1206, "unidades": 1, "status": "disponible", "foto": "MOB-09" },
+    { "id": "MOB-07", "nombre": "Escritorio operativo con canto curvo", "cat": "mobiliario", "estado": "Detalles estéticos", "precio": 1067, "unidades": 1, "status": "disponible", "foto": "MOB-07" },
+    { "id": "MOB-16", "nombre": "Credenza baja para comedor, tono caoba", "cat": "mobiliario", "estado": "Detalles estéticos", "precio": 1067, "unidades": 1, "status": "disponible", "foto": "MOB-16" },
+    { "id": "MOB-02", "nombre": "Credenza / mueble bajo con puertas (gris)", "cat": "mobiliario", "estado": "Usada, buenas condiciones", "precio": 986, "unidades": 1, "status": "disponible", "foto": "MOB-02" },
+    { "id": "MOB-12", "nombre": "Archivero vertical gris de 3 cajones", "cat": "mobiliario", "estado": "Detalles estéticos, sin chapa", "precio": 928, "unidades": 1, "status": "disponible", "foto": "MOB-12" },
+    { "id": "MOB-03", "nombre": "Cajonera móvil para escritorio (2 gavetas)", "cat": "mobiliario", "estado": "Usada, buenas condiciones", "precio": 870, "unidades": 1, "status": "disponible", "foto": "MOB-03" },
+    { "id": "MOB-11", "nombre": "Gabinete colgante para 3 tubos, con juego de tubos LED", "cat": "electro", "estado": "Usado", "precio": 864, "unidades": 4, "instalado": true, "status": "disponible", "foto": "MOB-11", "nota": "Claves MOB-11 a MOB-11.3. Gabinete solo: $667 · tubos solos: $197." },
+    { "id": "MOB-10", "nombre": "Mesa esquinera de recepción", "cat": "mobiliario", "estado": "Buen estado", "precio": 534, "unidades": 1, "status": "disponible", "foto": "MOB-10" },
+    { "id": "MOB-18", "nombre": "Horno de microondas Daewoo blanco", "cat": "electro", "estado": "Funcional, usado", "precio": 534, "unidades": 1, "status": "disponible", "foto": "MOB-18" },
+    { "id": "MOB-26", "nombre": "Gabinete colgante para 2 tubos, con juego de tubos LED", "cat": "electro", "estado": "Usado", "precio": 527, "unidades": 2, "instalado": true, "status": "disponible", "foto": "MOB-26", "nota": "Claves MOB-26 y MOB-27. Gabinete solo: $394 · tubos solos: $133." },
+    { "id": "MOB-20", "nombre": "Lámpara de piso de 2 focos (negra)", "cat": "mobiliario", "estado": "Buen estado", "precio": 464, "unidades": 1, "status": "disponible", "foto": "MOB-20" },
+    { "id": "MOB-06", "nombre": "Silla ejecutiva giratoria, tactopiel negra", "cat": "sillas", "estado": "Detalles estéticos y funcionales", "precio": 406, "unidades": 4, "status": "disponible", "foto": "MOB-06", "nota": "Claves MOB-06 a MOB-06.03." },
+    { "id": "MOB-08", "nombre": "Mesa auxiliar cuadrada / credenza pequeña", "cat": "mobiliario", "estado": "Buen estado", "precio": 394, "unidades": 1, "status": "disponible", "foto": "MOB-08" },
+    { "id": "MOB-04.02", "nombre": "Silla de visita apilable con brazos, tapiz negro", "cat": "sillas", "estado": "Detalles estéticos menores", "precio": 278, "unidades": 2, "status": "disponible", "foto": "MOB-04.02", "nota": "Claves MOB-04.02 y MOB-04.03." },
+    { "id": "MOB-04", "nombre": "Silla de visita apilable con brazos, tapiz negro", "cat": "sillas", "estado": "Detalles estéticos", "precio": 244, "unidades": 2, "status": "disponible", "foto": "MOB-04", "nota": "Claves MOB-04 y MOB-04.01." },
+    { "id": "MOB-05", "nombre": "Silla de visita apilable sin brazos, tapiz negro", "cat": "sillas", "estado": "Detalles estéticos", "precio": 232, "unidades": 2, "status": "disponible", "foto": "MOB-05.01", "nota": "Claves MOB-05.01 y MOB-05.02." },
+    { "id": "MOB-25", "nombre": "Cafetera Black+Decker de 12 tazas", "cat": "electro", "estado": "Usada", "precio": 203, "unidades": 1, "status": "disponible", "foto": "MOB-25" },
+    { "id": "MOB-24", "nombre": "Minisplit LG de pared (para refacciones)", "cat": "gratis", "estado": "No enfría bien · para técnicos o repuesto", "precio": 0, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-24" },
+    { "id": "MOB-29", "nombre": "Juego de luces decorativas de oficina", "cat": "gratis", "estado": "Instaladas, usadas", "precio": 0, "unidades": 1, "instalado": true, "status": "disponible", "foto": null },
+    { "id": "MOB-30", "nombre": "Rieles de luces decorativas", "cat": "gratis", "estado": "Instalados, usados", "precio": 0, "unidades": 1, "instalado": true, "status": "disponible", "foto": null },
+    { "id": "MOB-31", "nombre": "Cuadros de acrílico", "cat": "gratis", "estado": "Instalados, usados", "precio": 0, "unidades": 1, "instalado": true, "status": "disponible", "foto": null }
+  ],
+  "lotes": [
+    { "nombre": "Todas las sillas", "detalle": "4 ejecutivas + 4 de visita con brazos + 2 sin brazos (10 sillas)", "lista": 3132, "precio": 2600 },
+    { "nombre": "Oficina completa", "detalle": "Escritorio en \"L\" + silla ejecutiva + cajonera móvil", "lista": 2877, "precio": 2500 },
+    { "nombre": "Iluminación completa", "detalle": "6 gabinetes colgantes con sus tubos LED", "lista": 4510, "precio": 3600 }
+  ]
+}
