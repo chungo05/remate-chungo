@@ -105,9 +105,10 @@ a.chip{text-decoration:none}
 .tag{font-size:12px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
 .tag.inst{color:var(--gold-text);border-color:currentColor}
 .tag.free{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
-.status{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:4px;position:absolute;top:8px;left:8px}
+/* banda de estatus sobre la foto: grande para que se lea sin fijarse; azul = apartado, rojo = vendido */
+.status{position:absolute;bottom:12px;left:8px;right:8px;z-index:2;font-size:clamp(18px,3vw,26px);font-weight:700;text-transform:uppercase;letter-spacing:.06em;text-align:center;padding:8px;border-radius:4px;box-shadow:0 2px 8px #0006}
 .status.apartado{background:var(--hold);color:var(--on-hold)}
-.status.vendido{background:#B91C1C;color:#fff;top:auto;bottom:12px;left:8px;right:8px;z-index:2;font-size:clamp(18px,3vw,26px);text-align:center;padding:8px;box-shadow:0 2px 8px #0006}
+.status.vendido{background:#B91C1C;color:#fff}
 .card.is-vendido{border:2px solid #DC2626}
 .card.is-vendido .ph::after{content:"";position:absolute;inset:12%;background:linear-gradient(45deg,transparent 47%,#DC2626 47%,#DC2626 53%,transparent 53%),linear-gradient(-45deg,transparent 47%,#DC2626 47%,#DC2626 53%,transparent 53%);pointer-events:none}
 .card.is-vendido .ph img{opacity:.65}
@@ -263,9 +264,12 @@ function card(i){
       ${action}
     </div></article>`;
 }
+const statusOrder = { vendido: 0, apartado: 1, disponible: 2 };
 let current = "all";
 function render(){
-  const list = D.items.filter(i => current === "all" || i.cat === current);
+  const list = D.items
+    .filter(i => current === "all" || i.cat === current)
+    .sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
   grid.innerHTML = list.map(card).join("");
   empty.hidden = list.length > 0;
 }

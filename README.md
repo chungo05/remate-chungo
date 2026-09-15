@@ -58,6 +58,8 @@ Al cambiar estilos en `site/index.html`, vuelve a ejecutar `python3 site/build.p
 
 | `fotosExtras` | Opcional. Lista de claves de fotos adicionales; aparecen como miniaturas y se abren en el visor. |
 
+El catálogo muestra primero los vendidos, después los apartados y finalmente los disponibles, también al filtrar por categoría. Dentro de cada estatus se conserva el orden de `items[]`.
+
 ### `lotes[]`
 
 `{ "nombre", "detalle", "lista", "precio" }` — `lista` es la suma comprando por separado; `precio` el del paquete. Aparecen en la sección "Paquetes"; tienen precios fijos sin IVA y sin factura. Al cambiar precios individuales, actualiza también `lista` para que coincida con la suma de los artículos del paquete.
