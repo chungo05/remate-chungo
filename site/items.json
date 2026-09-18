@@ -7,7 +7,7 @@
     "historia": "Nos cambiamos de oficina y seguimos atendiendo a nuestros asegurados. Preferimos que estas cosas sigan sirviendo a alguien de Tampico que mandarlas a la basura."
   },
   "items": [
-    {"id": "MOB-22", "nombre": "Minisplit Mirage Inverter X32", "cat": "clima", "estado": "Buen estado", "precio": 5500, "precioAnterior": 8000, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-22"},
+    {"id": "MOB-22", "nombre": "Minisplit Mirage Inverter X32", "cat": "clima", "estado": "Buen estado", "precio": 5000, "precioAnterior": 8000, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-22"},
     {"id": "MOB-21", "nombre": "Conjunto ejecutivo en \"L\" con librero y credenza de madera", "cat": "mobiliario", "estado": "Usado", "precio": 2500, "precioAnterior": 4500, "unidades": 1, "status": "disponible", "foto": "MOB-21"},
     {"id": "MOB-23", "nombre": "Minisplit Mirage (oficina central)", "cat": "clima", "estado": "Usado, con detalles de funcionamiento", "precio": 2000, "precioAnterior": 3200, "unidades": 1, "instalado": true, "status": "disponible", "foto": "MOB-23"},
     {"id": "MOB-01", "nombre": "Impresora multifuncional Samsung Xpress M2875FW", "cat": "computo", "estado": "Usada, operativa (imprime, copia y escanea)", "precio": 3000, "unidades": 1, "status": "vendido", "foto": "MOB-01"},
