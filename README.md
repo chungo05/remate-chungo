@@ -48,8 +48,10 @@ Al cambiar estilos en `site/index.html`, vuelve a ejecutar `python3 site/build.p
 | Campo | Uso |
 |---|---|
 | `id` | Clave que ve el comprador y que llega en el mensaje de WhatsApp (`MOB-21`). |
-| `nombre`, `cat`, `estado`, `nota` | Textos de la tarjeta. `cat` debe ser una de: `mobiliario`, `sillas`, `computo`, `clima`, `electro`, `gratis`. |
-| `precio` | Precio de venta sin IVA, sin factura, en pesos enteros y múltiplos de $100. `0` = gratis con cualquier compra. |
+| `nombre`, `cat`, `nota` | Textos de la tarjeta. `cat` debe ser una de: `mobiliario`, `sillas`, `computo`, `clima`, `electro`, `gratis`. |
+| `estado` | Condición conservada como referencia interna; no se muestra en las tarjetas. |
+| `precio` | Precio de venta sin IVA, sin factura, en pesos enteros. Los ajustes posteriores pueden usar importes específicos, como $250. `0` = gratis con cualquier compra. |
+| `precioAnterior` | Opcional para artículos y paquetes. Precio de venta antes de la rebaja; si supera el precio final, muestra «Antes» tachado y «Ahora». Conservar la referencia al aplicar nuevas rebajas de la misma promoción. |
 | `nuevo` | Opcional. Precio aproximado nuevo; se muestra tachado como referencia ("Nuevo cuesta ~$12,000"). |
 | `unidades` | Si es > 1 se muestra "N disponibles" y el precio lleva "c/u". |
 | `instalado` | `true` muestra la etiqueta "Instalado · tú lo desmontas". |

@@ -99,12 +99,12 @@ a.chip{text-decoration:none}
 .card .body{container-type:inline-size;padding:10px 12px 12px;display:flex;flex-direction:column;gap:5px;flex:1}
 .key{font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.02em}
 .card h3{font-size:16px;line-height:1.25;font-weight:700;overflow-wrap:anywhere}
-.estado{font-size:14px;color:var(--ink-2)}
 .nota{font-size:13px;color:var(--ink-2);overflow-wrap:anywhere}
 .tags{display:flex;gap:5px;flex-wrap:wrap}
 .tag{font-size:12px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--bg);color:var(--ink-2);border:1px solid var(--line)}
 .tag.inst{color:var(--gold-text);border-color:currentColor}
 .tag.free{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
+.discount-badge{position:absolute;top:8px;left:8px;z-index:3;padding:6px 9px;border-radius:4px;background:var(--gold);color:var(--on-gold);font-family:var(--body);font-size:13px;font-weight:800;line-height:1.2;box-shadow:0 2px 6px #0003;pointer-events:none}
 /* banda de estatus sobre la foto: grande para que se lea sin fijarse; azul = apartado, rojo = vendido */
 .status{position:absolute;bottom:12px;left:8px;right:8px;z-index:2;font-size:clamp(18px,3vw,26px);font-weight:700;text-transform:uppercase;letter-spacing:.06em;text-align:center;padding:8px;border-radius:4px;box-shadow:0 2px 8px #0006}
 .status.apartado{background:var(--hold);color:var(--on-hold)}
@@ -120,6 +120,8 @@ a.chip{text-decoration:none}
 .price{margin-top:auto;padding-top:8px}
 .price .now{font-size:30px;line-height:1;color:var(--ink);display:block}
 .price .now .each{font-family:var(--body);font-weight:400;font-size:13px;color:var(--ink-2);margin-left:4px}
+.price .before{display:block;font-size:14px;color:var(--ink-2);margin-bottom:5px}
+.price .final-label{display:block;font-family:var(--body);font-size:12px;font-weight:600;margin-bottom:4px}
 .price .nuevo{display:block;font-size:13px;color:var(--ink-2);margin-top:2px}
 .price .nuevo s{text-decoration-thickness:1.5px}
 .card.is-vendido .price .now{text-decoration:line-through;color:var(--ink-2)}
@@ -195,7 +197,7 @@ dialog.viewer::backdrop{background:rgba(4,10,18,.88)}
       <div><dt>Ver y recoger</dt><dd id="dir"></dd></div>
       <div><dt>Pago</dt><dd>Efectivo o transferencia al recoger. Precios sin IVA. Sin factura.</dd></div>
       <div><dt>Instalados</dt><dd>Minisplits, conmutador, cámaras y gabinetes de luz están montados. El comprador los desmonta y se los lleva; no incluimos técnico.</dd></div>
-      <div><dt>Sin garantía</dt><dd>Todo es usado y se vende en el estado que se describe. Revísalo antes de pagar.</dd></div>
+      <div><dt>Sin garantía</dt><dd>Todo es usado y se vende sin garantía. Revísalo antes de pagar.</dd></div>
     </dl>
   </section>
 
@@ -233,18 +235,28 @@ document.getElementById('availability').innerHTML =
 const wa = txt => `https://wa.me/${C.whatsapp}?text=${encodeURIComponent(txt)}`;
 document.getElementById('wa-top').href = wa("Hola, vi el remate de Grupo Chung y tengo una pregunta.");
 
+function priceMarkup(item){
+  const each = item.unidades > 1 ? " c/u" : "";
+  const discounted = Number.isFinite(item.precioAnterior) && item.precioAnterior > item.precio && item.precio > 0;
+  return `${discounted ? `<span class="before">Antes <s>${mxn(item.precioAnterior)}</s>${each}</span>` : ""}
+    <span class="now">${discounted ? '<span class="final-label">Ahora</span>' : ""}${item.precio === 0 ? "Gratis" : mxn(item.precio)}${each ? `<span class="each">${each.trim()}</span>` : ""}</span>`;
+}
+
 const grid = document.getElementById('grid'), empty = document.getElementById('empty');
 function card(i){
   const price = i.precio;
   const gratis = i.precio === 0;
   const tags = [];
-  if (i.unidades > 1) tags.push(`<span class="tag">${i.unidades} disponibles</span>`);
+  if (i.unidades > 1) tags.push(`<span class="tag">${i.unidades} ${i.status === "vendido" ? "vendidos" : i.status === "apartado" ? "apartados" : "disponibles"}</span>`);
   if (i.instalado) tags.push(`<span class="tag inst">Instalado · tú lo desmontas</span>`);
   if (gratis) tags.push(`<span class="tag free">Gratis con cualquier compra</span>`);
   const status = i.status !== "disponible" ? `<span class="status ${i.status}">${i.status}</span>` : "";
+  const discountPercent = Number.isFinite(i.precioAnterior) && i.precioAnterior > price && price > 0
+    ? Math.floor((i.precioAnterior - price) * 100 / i.precioAnterior) : 0;
+  const discount = discountPercent > 0 ? `<span class="discount-badge">−${discountPercent}% dto.</span>` : "";
   const ph = i.foto
-    ? `<button class="ph${i.fotosExtras ? " fit" : ""}" type="button" data-foto="${i.foto}" data-cap="${esc(i.id + " · " + i.nombre)}" aria-label="Ver foto grande: ${esc(i.nombre)}"><img src="fotos/${i.foto}.jpg" alt="" loading="lazy">${status}</button>`
-    : `<div class="ph none"><span>Sin foto aún. <a href="${wa(`Hola, ¿me mandas foto de ${i.id} – ${i.nombre}?`)}" target="_blank" rel="noopener">Pídela por WhatsApp</a></span>${status}</div>`;
+    ? `<button class="ph${i.fotosExtras ? " fit" : ""}" type="button" data-foto="${i.foto}" data-cap="${esc(i.id + " · " + i.nombre)}" aria-label="Ver foto grande: ${esc(i.nombre)}${discountPercent > 0 ? `, ${discountPercent}% de descuento` : ""}"><img src="fotos/${i.foto}.jpg" alt="" loading="lazy">${status}${discount}</button>`
+    : `<div class="ph none"><span>Sin foto aún. <a href="${wa(`Hola, ¿me mandas foto de ${i.id} – ${i.nombre}?`)}" target="_blank" rel="noopener">Pídela por WhatsApp</a></span>${status}${discount}</div>`;
   const msg = `Hola, me interesa ${i.id} – ${i.nombre} (${gratis ? "gratis" : mxn(price)}). ¿Sigue disponible?`;
   const action = i.status === "vendido" ? "" :
     `<a class="btn" href="${wa(msg)}" target="_blank" rel="noopener">${i.status === "apartado" ? "Preguntar si se libera" : "Me interesa"}</a>`;
@@ -254,13 +266,10 @@ function card(i){
       ${i.fotosExtras?.length ? `<div class="photo-extras" role="group" aria-label="Más fotos de ${esc(i.nombre)}">${i.fotosExtras.map((foto, ix) => `<button class="photo-extra" type="button" data-foto="${esc(foto)}" data-cap="${esc(i.id + " · " + i.nombre)}" aria-label="Ver foto adicional ${ix + 1} de ${esc(i.nombre)}"><img src="fotos/${esc(foto)}.jpg" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
       <div class="key">${i.id}</div>
       <h3>${esc(i.nombre)}</h3>
-      <div class="estado">${esc(i.estado)}</div>
       ${i.nota ? `<div class="nota">${esc(i.nota)}</div>` : ""}
       ${i.nuevo ? `<div class="nota num">Nuevo cuesta ~<s>${mxn(i.nuevo)}</s></div>` : ""}
       ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
-      <div class="price num">${gratis
-        ? `<span class="now">Gratis</span>`
-        : `<span class="now">${mxn(price)}${i.unidades > 1 ? `<span class="each">c/u</span>` : ""}</span>${i.nuevo ? `<span class="nuevo">Nuevo cuesta <s>~${mxn(i.nuevo)}</s></span>` : ""}`}</div>
+      <div class="price num">${priceMarkup(i)}</div>
       ${action}
     </div></article>`;
 }
@@ -307,7 +316,7 @@ viewer.addEventListener('close', () => { vimg.src = ""; });
 document.getElementById('lots').innerHTML = D.lotes.map(l => {
   const p = l.precio;
   return `<div class="lot"><h3>${esc(l.nombre)}</h3><div class="detalle">${esc(l.detalle)}</div>
-    <div class="price num"><span class="now">${mxn(p)}</span><span class="was">${mxn(l.lista)} comprando por separado</span></div>
+    <div class="price num">${priceMarkup(l)}<span class="was">${mxn(l.lista)} comprando por separado</span></div>
     <a class="btn" href="${wa(`Hola, me interesa el paquete "${l.nombre}" (${mxn(p)}). ¿Sigue disponible?`)}" target="_blank" rel="noopener">Me interesa el paquete</a></div>`;
 }).join("");
 </script>
